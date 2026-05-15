@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx playwright *)",
+      "Bash(npm install *)",
+      "Bash(node *)",
+      "Bash(findstr /i \"nav\\\\|header\\\\|button\\\\|input\\\\|form\\\\|href\\\\|plan\\\\|price\\\\|phone\")",
+      "PowerShell(New-Item *)",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:5174/latest.json)",
+      "Skill(create-task-spec)",
+      "Skill(implement-task-from-spec)",
+      "Skill(check-locators)",
+      "Bash(npx vite *)",
+      "Bash(mkdir -p \"C:\\\\Users\\\\dumh\\\\Desktop\\\\web\\\\claude-test\\\\.claude\\\\skills\\\\e2e-spec\")",
+      "Bash(mkdir -p \"C:\\\\Users\\\\dumh\\\\Desktop\\\\web\\\\claude-test\\\\.claude\\\\skills\\\\e2e-build\")",
+      "Bash(mkdir -p \"C:\\\\Users\\\\dumh\\\\Desktop\\\\web\\\\claude-test\\\\.claude\\\\skills\\\\setup-data\")",
+      "WebSearch",
+      "WebFetch(domain:kiro.dev)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:kiro.directory)",
+      "WebFetch(domain:gist.github.com)",
+      "Skill(e2e-build)",
+      "Skill(e2e-spec)",
+      "Bash(dir \"test-results\\\\plans-plans-Plans-TC-006-B-f1bbf-vigates-to-cart-or-checkout-chromium-retry1\\\\\" 2>&1)",
+      "Bash(Test-Path \"C:\\\\Users\\\\dumh\\\\Desktop\\\\web\\\\claude-test\\\\docs\\\\specs\\\\cart\\\\cart.spec.md\")",
+      "Bash(Test-Path \"C:\\\\Users\\\\dumh\\\\Desktop\\\\web\\\\claude-test\\\\docs\\\\test-cases\\\\cart\\\\cart.test-cases.md\")",
+      "Bash(New-Item -ItemType Directory -Force \"C:\\\\Users\\\\dumh\\\\Desktop\\\\web\\\\claude-test\\\\docs\\\\ui-map\\\\cart\")",
+      "Bash(Out-Null)",
+      "Bash(Write-Output \"done\")",
+      "Bash(Remove-Item docs\\\\screenshot.png, docs\\\\cart-empty-inspect.png, docs\\\\plans-inspect.png, docs\\\\cart-with-items.png, docs\\\\plans-after-click.png, docs\\\\cart-after-click.png, docs\\\\cart-items-full.png -ErrorAction SilentlyContinue)",
+      "Bash(Write-Output \"Done\")",
+      "Bash(TARGET_URL=https://your-site.com/checkout FEATURE=checkout PAGE=checkout node scripts/crawl.js)",
+      "Bash(TARGET_URL=https://your-site.com/plans FEATURE=checkout PAGE=checkout node scripts/crawl.js)",
+      "Bash(TARGET_URL=https://your-site.com/cart FEATURE=checkout PAGE=cart node scripts/crawl.js)",
+      "Skill(fix-test)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(curl *)",
+      "Bash(npx tsc *)"
+    ]
+  }
+}

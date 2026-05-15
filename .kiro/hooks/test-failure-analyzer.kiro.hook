@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Test Failure Auto-Analyzer",
+  "description": "When a test result file is created (after a test run), analyze failures and suggest fixes",
+  "version": "1",
+  "when": {
+    "type": "fileCreated",
+    "patterns": [
+      "reports/run-*.json"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A new test report was just created. Read the report file and check if summary.failed > 0. If there are failures, for each failed test: read the error.message, error.expected, error.received fields, and the screenshot path. Classify each failure as: app bug | test bug | selector issue | flaky | environment issue. Then suggest the specific fix needed. If all tests passed, just confirm with a brief summary of the run."
+  }
+}

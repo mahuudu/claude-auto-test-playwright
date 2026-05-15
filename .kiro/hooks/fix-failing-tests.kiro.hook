@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Fix Failing Tests",
+  "description": "Manually trigger analysis and auto-fix of failing tests from the latest report",
+  "version": "1",
+  "when": {
+    "type": "manual"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Read reports/latest.json. Find all tests with status 'failed'. For each failure: read error.message, error.expected, error.received, and the screenshot file. Read the corresponding spec file (specFile field) and POM file. Classify the root cause as: app bug | test bug | selector issue | flaky | environment issue. Fix test bugs, selector issues, and flaky tests by updating the POM or test file. Mark app bugs with test.fixme(). Re-run the tests after fixing. Repeat up to 3 times until all fixable tests pass."
+  }
+}

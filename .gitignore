@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+report-viewer/node_modules/
+dist/
+
+# Environment
+.env
+.env.local
+.env.*.local
+.env.dev
+.env.staging
+.env.prod
+# .env.example is intentionally committed
+
+# Auth state — contains session tokens, never commit
+.auth/
+
+# Playwright output
+test-results/
+playwright-report/
+
+# Run reports — chỉ giữ .gitkeep
+reports/*.json
+reports/latest.json
+
+# Crawl artifacts — generated, không commit
+docs/crawl/
+docs/crawl-data.json
+docs/raw-html.txt
+docs/screenshot.png
+docs/*.png
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/

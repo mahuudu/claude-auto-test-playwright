@@ -1,0 +1,77 @@
+name: E2E Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      env:
+        description: 'Target environment'
+        required: true
+        default: 'dev'
+        type: choice
+        options: [dev, staging]
+
+jobs:
+  e2e:
+    name: E2E (${{ matrix.env }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        env: ${{ github.event_name == 'workflow_dispatch' && fromJSON(format('["{0}"]', inputs.env)) || fromJSON('["dev"]') }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Write env file
+        env:
+          BASE_URL:           ${{ secrets[format('BASE_URL_{0}', matrix.env)] }}
+          TEST_USER_EMAIL:    ${{ secrets[format('TEST_USER_EMAIL_{0}', matrix.env)] }}
+          TEST_USER_PASSWORD: ${{ secrets[format('TEST_USER_PASSWORD_{0}', matrix.env)] }}
+          SLACK_WEBHOOK_URL:  ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          echo "BASE_URL=$BASE_URL"                     >> .env.${{ matrix.env }}
+          echo "TARGET_URL=$BASE_URL"                   >> .env.${{ matrix.env }}
+          echo "TEST_USER_EMAIL=$TEST_USER_EMAIL"       >> .env.${{ matrix.env }}
+          echo "TEST_USER_PASSWORD=$TEST_USER_PASSWORD" >> .env.${{ matrix.env }}
+          echo "SLACK_WEBHOOK_URL=$SLACK_WEBHOOK_URL"   >> .env.${{ matrix.env }}
+
+      - name: Run E2E tests
+        run: npx playwright test
+        env:
+          ENV: ${{ matrix.env }}
+          CI: true
+
+      - name: Send Slack alert
+        if: always()
+        run: node scripts/send-alert.js
+        env:
+          ENV: ${{ matrix.env }}
+          CI: true
+
+      - name: Upload test artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-artifacts-${{ matrix.env }}
+          path: |
+            test-results/
+            playwright-report/
+            reports/
+          retention-days: 7

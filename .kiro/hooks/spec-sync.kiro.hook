@@ -1,0 +1,17 @@
+{
+  "enabled": true,
+  "name": "E2E Spec Review Reminder",
+  "description": "When a spec file is modified, remind to run /e2e-build to regenerate POM and tests",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "docs/specs/**/*.spec.md",
+      "docs/test-cases/**/*.test-cases.md"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A spec or test-case file was just edited. Check if the corresponding POM and test file at tests/e2e/ are still in sync with the updated spec. If the spec changed significantly (new TCs, removed TCs, changed steps or expected results), list what needs to be updated and suggest running /e2e-build <feature> <page> to regenerate."
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "UI Map Locator Drift Detector",
+  "description": "When a UI map file is edited, check if the POM still matches the updated locators",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "docs/ui-map/**/*.ui-map.md"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A UI map file was just edited. Compare the updated locators in the UI map with the corresponding Page Object Model in tests/e2e/pages/. List any locators that are out of sync and update the POM to match the new UI map. Follow the locator priority: getByRole > getByLabel > getByPlaceholder > getByText > data-testid."
+  }
+}

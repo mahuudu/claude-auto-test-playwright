@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Run E2E Pipeline (Quick)",
+  "description": "Manually trigger the full 9-step E2E pipeline for the current feature/page",
+  "version": "1",
+  "when": {
+    "type": "manual"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Ask the user: which feature and page do you want to test? (e.g. 'auth sign-in', 'plans list'). Then run the full 9-step E2E pipeline: 1) crawl the page, 2) generate spec, 3) generate test-cases, 4) inspect UI with Playwright, 5) create UI map, 6) create Page Object Model, 7) create test file, 8) run tests, 9) generate report and send alert. Follow the workflow defined in CLAUDE.md exactly."
+  }
+}
